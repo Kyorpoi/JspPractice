@@ -1,0 +1,45 @@
+<%@ page contentType="text/html;charset=utf-8"%>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+<tr bgcolor = "white">
+	<td class = "two" colspan=6>
+	<%!
+		int visitcount=0;
+		synchronized void add(){
+			visitcount++;
+		} 
+	%>
+	<%
+		add();
+	%>
+	当前访问的次数：<%=visitcount%>
+	</td>
+</tr>
+<tr>
+	<td colspan = 6>
+		<%
+			if(application.getAttribute("count") == null){
+				application.setAttribute("count","1");
+				out.print("欢迎，您是第一位顾客！");
+			}else{
+				int i=Integer.parseInt((String)(application.getAttribute("count")));
+				if(session.isNew())
+				{
+					i++;
+					application.setAttribute("count",String.valueOf(i));
+				}
+				out.print("欢迎，您是第"+i+"位顾客！");	
+				
+			}
+		%>
+	</td>
+</tr>
+<tr>
+	<td colspan=6>
+	版权所有：山东理工大学软件工程1603<br/>
+	网络文化经营许可证：网文[2019]0123-001号<br/>
+	客服电话：010-12345<br/>
+	如有异议或意见，请<a href="Suggestion.jsp">留言</a>
+	或发送<a href="mailto:945830674@qq.com">邮件</a><br/>
+	技术支持：山东理工大学软件精英团队
+	</td>
+</tr>
